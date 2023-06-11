@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.button-logo {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes fade-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-top-animation {
+  animation: fade-top 1.2s ease-in-out;
+}
+
+
