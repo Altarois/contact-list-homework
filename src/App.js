@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ContactTable from './components/contactTable';
+import materialTable from './components/materialTable'
 import { Fade } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import MaterialTable from './components/materialTable';
 
 
 
@@ -17,6 +19,8 @@ const App = () => {
     { firstName: 'Jhon', surname: 'Dowell', email: 'jhon@example.com', phoneNumber: '0777573270' },
   ]);
 
+  const [choiceTable, setChoiceTable] = useState(true)
+
   const [newContact, setNewContact] = useState({
     firstName: '',
     surname: '',
@@ -25,10 +29,18 @@ const App = () => {
   });
 
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   //useEffect for handling error timeout
   useEffect(() => {
     let timeout;
+
+    if (success) {
+      timeout = setTimeout(() => {
+        setSuccess('');
+      }, 3000);
+    }
+    
 
     if (error) {
       timeout = setTimeout(() => {
@@ -39,7 +51,7 @@ const App = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [error]);
+  }, [error, success]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,6 +60,10 @@ const App = () => {
       [name]: value,
     }));
   };
+
+  const switchTable = () => {
+    setChoiceTable(!choiceTable)
+  }
 
   //basic input form validation
   const validateForm = () => {
@@ -82,6 +98,7 @@ const App = () => {
   const handleAddContact = () => {
     if (validateForm()) {
       setContacts((prevContacts) => [...prevContacts, newContact]);
+      setSuccess(`contact ${newContact.firstName} added successfuly`);
       setNewContact({
         firstName: '',
         surname: '',
@@ -106,10 +123,17 @@ const App = () => {
     <div className="container w-55 fade-top-animation" style={{width:"45%"}}>
 
       <Fade in={!!error} timeout={1500}>
-        <div className="alert alert-danger mb-2"  role="alert">
+        <div className="alert alert-danger mb-1 mt-1"  role="alert">
           {error}
         </div>
       </Fade>
+
+      <Fade in={!!success} timeout={1500}>
+        <div className="alert alert-success mb-1 mt-1"  role="alert">
+          {success}
+        </div>
+      </Fade>
+
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">First Name</InputGroup.Text>
         <FormControl
@@ -152,12 +176,20 @@ const App = () => {
           onChange={handleInputChange}
         />
       </InputGroup>
+      <div class="btn-group" role="group" aria-label="Basic example">
       <button className="btn btn-primary mb-3" onClick={handleAddContact}>
         Add
         <img class="button-logo" width="30" height="30" src="https://img.icons8.com/office/30/add-user-male--v1.png" alt="add-user-male--v1"/>
     </button>
 
-      <ContactTable contacts={contacts} onRemove={handleRemoveContact} />
+    <button className="btn btn-secondary mb-3 ml-1" onClick={switchTable}>
+        Switch
+        <img class="button-logo" width="30" height="30" src="https://img.icons8.com/fluency/96/find-and-replace.png" alt="find-and-replace"/>
+    </button>
+      </div>
+      
+      {choiceTable ? <ContactTable contacts={contacts} onRemove={handleRemoveContact} /> : <MaterialTable contacts={contacts} onRemove={handleRemoveContact} />}
+    
     </div>
 </div>
   );

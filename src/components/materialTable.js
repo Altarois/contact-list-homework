@@ -4,8 +4,9 @@ import { formatPhoneNumber } from '../utils/utils';
 
 const MaterialTable = ({ contacts, onRemove }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className='fade-bot-animation'>
       <Table>
+      <caption>Total Contacts: {contacts.length}</caption>
         <TableHead>
           <TableRow>
             <TableCell>#</TableCell>
@@ -36,7 +37,7 @@ const MaterialTable = ({ contacts, onRemove }) => {
           ))}
         </TableBody>
       </Table>
-      <div>Total Contacts: {contacts.length}</div>
+
     </TableContainer>
   );
 };

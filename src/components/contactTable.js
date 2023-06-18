@@ -7,7 +7,7 @@ import { formatPhoneNumber } from '../utils/utils';
 const ContactTable = ({ contacts, onRemove }) => {
   return (
 
-      <Table striped bordered hover variant="info">
+      <Table striped bordered hover variant="info" className='fade-bot-animation'>
         <thead >
           <tr>
             <th>First Name</th>
