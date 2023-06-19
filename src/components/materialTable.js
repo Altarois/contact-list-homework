@@ -1,12 +1,20 @@
-import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { formatPhoneNumber } from '../utils/utils';
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { formatPhoneNumber } from "../utils/utils";
 
 const MaterialTable = ({ contacts, onRemove }) => {
   return (
-    <TableContainer component={Paper} className='fade-bot-animation'>
+    <TableContainer component={Paper} className="fade-bot-animation">
       <Table>
-      <caption>Total Contacts: {contacts.length}</caption>
+        <caption>Total Contacts: {contacts.length}</caption>
         <TableHead>
           <TableRow>
             <TableCell>#</TableCell>
@@ -37,7 +45,6 @@ const MaterialTable = ({ contacts, onRemove }) => {
           ))}
         </TableBody>
       </Table>
-
     </TableContainer>
   );
 };
